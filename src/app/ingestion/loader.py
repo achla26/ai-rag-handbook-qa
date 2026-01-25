@@ -68,6 +68,4 @@ class DocumentLoader:
             return self.load_text_file(file_path)
 
  
-document_loader = DocumentLoader()
-
-document_loader.load_file(file_path = "src/data/documents/hello.txt") 
+loader = DocumentLoader()
