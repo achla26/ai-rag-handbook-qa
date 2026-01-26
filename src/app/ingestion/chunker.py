@@ -240,5 +240,5 @@ def create_chunker(
     """Factory function to create a chunker."""
     return TextChunker(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
 
- 
-chunker = create_chunker() 
+
+text_chunker = create_chunker()

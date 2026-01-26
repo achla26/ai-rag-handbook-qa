@@ -4,7 +4,7 @@ from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
 from pathlib import Path
 
 def Logger(
-    name: str = __name__,
+    name:  str | None = None,
     level: int = logging.INFO,
     log_file: str | Path | None = "logs/app.log",      # Set to None to disable file logging
     file_level: int | None = None,                # None = same as console level
@@ -21,7 +21,7 @@ def Logger(
         use_timed_rotation: If True, uses TimedRotatingFileHandler (daily logs)
         max_bytes / backup_count: Used only with RotatingFileHandler
     """
-    logger = logging.getLogger(name)
+    logger = logging.getLogger(name or "__main__")
     
     # Prevent adding handlers multiple times (important in notebooks/scripts that reload)
     if logger.handlers:
