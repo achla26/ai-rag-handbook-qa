@@ -92,11 +92,11 @@ class DocumentLoader:
                 try:
                     doc = self.load_file(file_path)
                     documents.append(doc)
-                    logger.info(f"✅ Loaded: {file_path.name}")
+                    logger.info(f"Loaded: {file_path.name}")
                 except Exception as e:
-                    logger.error(f"❌ Failed to load {file_path.name}: {e}")
+                    logger.error(f"Failed to load {file_path.name}: {e}")
         
-        logger.info(f"📚 Total documents loaded: {len(documents)}")
+        logger.info(f"Total documents loaded: {len(documents)}")
         return documents
 
  
