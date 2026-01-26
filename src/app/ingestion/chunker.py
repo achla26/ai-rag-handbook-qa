@@ -36,7 +36,7 @@ class TextChunker:
         self.chunk_overlap = chunk_overlap
         self.separator = separator
         
-        # More robust sentence split pattern
+        # sentence split pattern based on look behind to match .!? in mid space and look ahead capital letter
         self.sentence_pattern = re.compile(r'(?<=[.!?])\s+(?=[A-Z])')
     
     def _split_into_sentences(self, text: str) -> List[str]:
@@ -240,8 +240,5 @@ def create_chunker(
     """Factory function to create a chunker."""
     return TextChunker(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
 
-
-data = 'helo hi this is first line hin jfnv r this is second line hi this is third line hi this is fourth line hi this is fifth line'
-
-chunker = create_chunker()
-print(chunker._split_long_sentence(data, 10))
+ 
+chunker = create_chunker() 

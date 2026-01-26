@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Dict, Any
+from typing import List, Dict, Any
 from dataclasses import dataclass
 import hashlib
 import logging
@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 class Document:
     """Loaded document ka structure."""
     content: str
-    doc_id: str
     metadata: Dict[str, Any]
+    doc_id: str
 
     @classmethod   
     def load_document(cls, content: str, file_path: Path, id: str) -> 'Document':
@@ -49,23 +49,55 @@ class DocumentLoader:
 
         doc_id=self._generate_doc_id(content, file_path.name)
 
-        return Document.load_document(content , file_path , id =doc_id)       
- 
+        return Document.load_document(content , file_path , id =doc_id)
+    
+    def load_pdf_file(self, file_path: Path) -> Document:
+        """load PDF file using PyMuPDF."""
+        import fitz  # PyMuPDF
+        
+        doc = fitz.open(file_path)
+        content = ""
+        
+        for page_num, page in enumerate(doc):
+            content += f"\n--- Page {page_num + 1} ---\n"
+            content += page.get_text()
+        
+        doc.close()
+
+        doc_id=self._generate_doc_id(content, file_path.name)
+
+        return Document.load_document(content , file_path , id =doc_id)
+    
     def load_file(self, file_path: Path) -> Document:
         """load Any supported file."""
         file_path = Path(file_path)
          
         if not file_path.exists(): 
             raise FileNotFoundError(f"File not found: {file_path}")
-         
         
         if file_path.suffix not in self.SUPPORTED_EXTENSIONS:
             raise ValueError(f"Unsupported file type: {file_path.suffix}")
         
         if file_path.suffix == ".pdf":
-            pass
+            return self.load_pdf_file(file_path)
         else:
             return self.load_text_file(file_path)
+    
+    def load_directory(self) -> List[Document]:
+        """Saari files load karo data directory se."""
+        documents = []
+        
+        for ext in self.SUPPORTED_EXTENSIONS:
+            for file_path in self.data_dir.glob(f"*{ext}"):
+                try:
+                    doc = self.load_file(file_path)
+                    documents.append(doc)
+                    logger.info(f"✅ Loaded: {file_path.name}")
+                except Exception as e:
+                    logger.error(f"❌ Failed to load {file_path.name}: {e}")
+        
+        logger.info(f"📚 Total documents loaded: {len(documents)}")
+        return documents
 
  
-loader = DocumentLoader()
+document_loader = DocumentLoader()
