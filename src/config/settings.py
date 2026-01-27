@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field, SecretStr
 from typing import Literal
+from pathlib import Path
 
 class Settings(BaseSettings):
     """Application configuration with environment variable support."""
@@ -100,7 +101,7 @@ class Settings(BaseSettings):
     
     # Pydantic v2 Configuration
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=["../.env", ".env"],
         env_file_encoding="utf-8",
         # env_prefix="APP_",  # Optional: prefix for env vars
         case_sensitive=False,
