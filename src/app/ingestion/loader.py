@@ -34,9 +34,15 @@ class DocumentLoader:
     SUPPORTED_EXTENSIONS = {".txt", ".md", ".pdf"}
 
     # create folder     
-    def __init__(self, data_dir: str = "src/data/documents"):
-        self.data_dir = Path(data_dir) 
-        self.data_dir.mkdir(parents=True, exist_ok=True) 
+    def __init__(self, data_dir: str | Path | None = None  ): 
+        if data_dir is not None:
+            self.data_dir = Path(data_dir).resolve()
+        else:
+            # YEHI LINE SABSE ZAROORI HAI → file ke location se relative path
+            self.data_dir = (Path(__file__).parent.parent.parent / "data" / "documents").resolve()
+        
+        # Folder bana do agar nahi hai
+        self.data_dir.mkdir(parents=True, exist_ok=True)
     
     def _generate_doc_id(self, content: str, filename: str) -> str:
         """Unique document ID generate karo."""
@@ -84,7 +90,7 @@ class DocumentLoader:
             return self.load_text_file(file_path)
     
     def load_directory(self) -> List[Document]:
-        """Saari files load karo data directory se."""
+        """Load All files from directory ."""
         documents = []
         
         for ext in self.SUPPORTED_EXTENSIONS:

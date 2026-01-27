@@ -3,7 +3,7 @@ import sys
 from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
 from pathlib import Path
 
-def Logger(
+def create_logger(
     name:  str | None = None,
     level: int = logging.INFO,
     log_file: str | Path | None = "logs/app.log",      # Set to None to disable file logging
@@ -69,11 +69,21 @@ def Logger(
 
     return logger
 
-logger = Logger()
+logger = create_logger()
 
 
 def die(message="Execution stopped"):
     """Log an error message and exit the program."""
     logger.error(message) 
     sys.exit(1)
- 
+
+
+def fprint(message: str = "", width: int = 100, symbol: str = "=", use_logger: bool = False):
+    """Print/log a simple box around a message."""
+    output = logger.info if use_logger else print
+    
+    output(f"\n{symbol * width}")
+    if message:
+        output(message)
+    output(f"{symbol * width}\n")
+     
