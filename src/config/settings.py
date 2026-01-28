@@ -19,6 +19,12 @@ class Settings(BaseSettings):
         description="Qdrant server URL with protocol",
         examples=["http://localhost:6333", "http://qdrant:6333"]
     )
+
+    qdrant_api_key: SecretStr = Field(
+        ...,
+        description="Qdrant API Key for Vector DB",
+        examples=["sk-..."]
+    )
     
     qdrant_collection_name: str = Field(
         "handbook_qa",

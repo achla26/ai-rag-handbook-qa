@@ -10,15 +10,14 @@ class VectorStore:
     """Qdrant Vector Database operations handler."""
     
     def __init__(self):
-        self.client = QdrantClient(url=settings.qdrant_url)
+        self.client = QdrantClient(url=settings.qdrant_url, api_key=settings.qdrant_api_key.get_secret_value())
         self.collection_name = settings.qdrant_collection_name
         self.vector_size = settings.embedding_dimension
     
     def create_collection(self) -> bool:
         """Collection create if not exist."""
         try:
-            collections = self.client.get_collections().collections
-            exists = any(c.name == self.collection_name for c in collections)
+            exists =  self.client.collection_exists(collection_name={self.collection_name}) 
             
             if not exists:
                 self.client.create_collection(
@@ -45,7 +44,7 @@ class VectorStore:
             return {
                 "status": "healthy",
                 "collections_count": len(info.collections),
-                "url": settings.qdrant_url
+                "url": settings.qdrant_url,
             }
         except Exception as e:
             return {
@@ -53,16 +52,19 @@ class VectorStore:
                 "error": str(e)
             }
     
-    def get_collection_info(self) -> Dict[str, Any]:
+    def get_collection_info(self , collection_name: str|None = None) -> Dict[str, Any]:
         """Fetch Collection details."""
-        try:
-            info = self.client.get_collection(self.collection_name)
+        try: 
+            collection_name = collection_name or self.collection_name
+            info = self.client.get_collection(collection_name=self.collection_name)
+           
             return {
                 "name": self.collection_name,
-                "vectors_count": info.vectors_count,
-                "points_count": info.points_count
+                "vectors_count": info.indexed_vectors_count,
+                "points_count": info.points_count,
+                "status":info.status
             }
-        except Exception:
-            return {"error": "Collection not found"}
+        except Exception as e:
+            return {"error": f"Collection not found {e}"}
 
 vector_store = VectorStore()

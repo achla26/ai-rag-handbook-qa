@@ -8,7 +8,7 @@ def main():
         if vector_store.health_check():
             logger.info("Qdrant connected!")
             
-            # Collection create karo
+            # Collection create
             vector_store.create_collection()
             logger.info("Collection ready!")
         else:
