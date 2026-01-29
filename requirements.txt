@@ -1,0 +1,9 @@
+pydantic-settings
+qdrant-client
+sentence-transformers
+groq
+pymupdf
+fastapi
+uvicorn
+streamlit
+requests
