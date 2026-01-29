@@ -7,6 +7,11 @@ class Settings(BaseSettings):
     """Application configuration with environment variable support."""
     
     # API Keys (SecretStr for security : won't print API keys in logs)
+    api_url: str = Field(
+        "http://localhost:8000/api/v1",
+        description="API URL for app", 
+    )
+
     groq_api_key: SecretStr = Field(
         ...,
         description="Groq API Key for LLM access",
