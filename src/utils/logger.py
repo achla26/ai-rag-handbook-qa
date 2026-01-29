@@ -78,7 +78,7 @@ def die(message="Execution stopped"):
     sys.exit(1)
 
 
-def fprint(message: str = "", width: int = 100, symbol: str = "-", use_logger: bool = False):
+def fprint(message: str = "", width: int = 60, symbol: str = "-", use_logger: bool = False):
     """Print/log a simple box around a message."""
     output = logger.info if use_logger else print
     
