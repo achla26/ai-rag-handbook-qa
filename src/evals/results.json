@@ -1,0 +1,113 @@
+{
+  "metrics": {
+    "total_tests": 10,
+    "passed": 10,
+    "failed": 0,
+    "accuracy": 100.0,
+    "citation_rate": 100.0,
+    "avg_latency_seconds": 1.015,
+    "p95_latency": 5.902
+  },
+  "results": [
+    {
+      "test_id": 1,
+      "question": "How many annual leaves can I take?",
+      "expected": "24 days",
+      "actual": "You are entitled to 24 days of annual leave per year [Source 1].",
+      "passed": true,
+      "has_citation": true,
+      "confidence": "MEDIUM",
+      "latency": 5.902
+    },
+    {
+      "test_id": 2,
+      "question": "What is the work from home policy?",
+      "expected": "2 days per week",
+      "actual": "The work from home policy allows employees to work from home up to 2 days per week, with prior appro...",
+      "passed": true,
+      "has_citation": true,
+      "confidence": "MEDIUM",
+      "latency": 0.629
+    },
+    {
+      "test_id": 3,
+      "question": "How many sick leaves are allowed?",
+      "expected": "12 days",
+      "actual": "Employees are allowed 12 days of sick leave per year [Source 1].",
+      "passed": true,
+      "has_citation": true,
+      "confidence": "MEDIUM",
+      "latency": 0.495
+    },
+    {
+      "test_id": 4,
+      "question": "Do I need medical certificate for sick leave?",
+      "expected": "yes, for leave exceeding 2 consecutive days",
+      "actual": "Yes, you need a medical certificate for sick leave exceeding 2 consecutive days [Source 1].",
+      "passed": true,
+      "has_citation": true,
+      "confidence": "MEDIUM",
+      "latency": 0.497
+    },
+    {
+      "test_id": 5,
+      "question": "Can I carry forward my annual leave?",
+      "expected": "up to 5 days only",
+      "actual": "Yes, you can carry forward your annual leave, but only up to 5 days [Source 1].",
+      "passed": true,
+      "has_citation": true,
+      "confidence": "MEDIUM",
+      "latency": 0.517
+    },
+    {
+      "test_id": 6,
+      "question": "What are the core working hours for WFH?",
+      "expected": "10 AM to 4 PM",
+      "actual": "The core working hours for Work From Home (WFH) are 10 AM to 4 PM [Source 1].",
+      "passed": true,
+      "has_citation": true,
+      "confidence": "MEDIUM",
+      "latency": 0.499
+    },
+    {
+      "test_id": 7,
+      "question": "How many public holidays are there?",
+      "expected": "10 public holidays",
+      "actual": "There are 10 public holidays per year [Source 1].",
+      "passed": true,
+      "has_citation": true,
+      "confidence": "MEDIUM",
+      "latency": 0.478
+    },
+    {
+      "test_id": 8,
+      "question": "Can sick leave be carried forward?",
+      "expected": "no",
+      "actual": "No, sick leave cannot be carried forward [Source 1].",
+      "passed": true,
+      "has_citation": true,
+      "confidence": "MEDIUM",
+      "latency": 0.485
+    },
+    {
+      "test_id": 9,
+      "question": "Who is the CEO?",
+      "expected": "NOT_FOUND",
+      "actual": "I don't have enough information to answer this question.",
+      "passed": true,
+      "has_citation": true,
+      "confidence": "LOW",
+      "latency": 0.321
+    },
+    {
+      "test_id": 10,
+      "question": "What is the salary structure?",
+      "expected": "NOT_FOUND",
+      "actual": "I don't have enough information to answer this question.",
+      "passed": true,
+      "has_citation": true,
+      "confidence": "LOW",
+      "latency": 0.325
+    }
+  ]
+}
